@@ -6,16 +6,23 @@ namespace Biblioteca
     {
         static void Main(string[] args)
         {
+            // Mostrar la descripción del ejercicio y los integrantes.
+            MostrarDescripcion();
+
+            // Creamos una instancia de la clase Biblioteca que contendrá los lectores y libros.
             Biblioteca biblioteca = new Biblioteca();
 
             // ---- CREAR LECTORES ----
+            // Bucle para crear Lectores
             Console.WriteLine("---- Crear Lectores ----");
             while (true)
             {
+                // El método string.IsNullOrWhiteSpace(nombre) devuelve true si la cadena ingresada es vacía, contiene solo espacios en blanco o es null.
                 Console.Write("Ingrese nombre del lector (ENTER para terminar): ");
                 string nombre = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(nombre)) break;
 
+                // Agregar validación para que el valor ingresado sea un número con al menos 7 / 8 dígitos.
                 Console.Write("Ingrese DNI del lector: ");
                 string dni = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(dni))
@@ -24,10 +31,12 @@ namespace Biblioteca
                     continue;
                 }
 
+                // Una vez ingresado el Nombre y el DNI, doy de alta el Lector. 
                 biblioteca.AltaLector(nombre, dni);
             }
 
             // ---- CREAR LIBROS ----
+            // Bucle para crear Libros
             Console.WriteLine("\n---- Crear Libros ----");
             while (true)
             {
@@ -35,6 +44,8 @@ namespace Biblioteca
                 string titulo = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(titulo)) break;
 
+                // Se busca que el título ingresado exista en el listado de libros cargados.
+                // Si existe pedimos que ingrese otro título, para evitar registrar libros duplicados.
                 if (biblioteca.ExisteLibro(titulo))
                 {
                     Console.WriteLine("El libro ya existe en la biblioteca. Intente con otro título.");
@@ -60,6 +71,10 @@ namespace Biblioteca
                 DateTime fechaLanzamiento;
                 while (true)
                 {
+                    // DateTime.TryParse(string, out DateTime) Éste método intenta convertir la cadena en un valor de tipo DateTime (fecha y hora).
+                    // Primer parámetro es la cadena que queremos convertir.
+                    // El segundo parámetro es out fechaLanzamiento: si la conversión es exitosa, el valor convertido se guarda en esta variable.
+                    // TryParse devuelve true si el usuario ingreso una fecha válida, de lo contrario pide ingresar una nueva fecha.
                     Console.Write("Ingrese fecha de lanzamiento (yyyy-MM-dd): ");
                     if (DateTime.TryParse(Console.ReadLine(), out fechaLanzamiento))
                         break;
@@ -67,23 +82,29 @@ namespace Biblioteca
                         Console.WriteLine("Formato inválido. Intente de nuevo.");
                 }
 
+                // Una vez se validaron todos los campos, se crea el nuevo libro y se agrega al listado de libros disponibles de la biblioteca.
+                // Mostramos cartel de que se agrego con éxito.
                 var nuevoLibro = new Libro(titulo, genero, fechaLanzamiento, autor);
                 biblioteca.LibrosDisponibles.Add(nuevoLibro);
                 Console.WriteLine($"Libro '{titulo}' agregado correctamente.\n");
             }
 
             // ---- PRESTAR LIBROS ----
+            // Bucle para prestar libros a un Lector
             while (true)
             {
                 Console.Write("¿Desea prestar un libro? (s/n): ");
                 string resp = Console.ReadLine().ToLower();
                 if (resp != "s") break;
 
+                // Se muestra los libros disponibles
                 biblioteca.MostrarLibros();
 
+                // Se pueden agregar validaciones al leer el titulo que no sea vacío.
                 Console.Write("Ingrese título del libro a prestar: ");
                 string tituloPrestamo = Console.ReadLine();
 
+                // Se puede agregar validaciones para que se ingrese números de DNI correctos.
                 Console.Write("Ingrese DNI del lector: ");
                 string dniLector = Console.ReadLine();
 
@@ -92,6 +113,16 @@ namespace Biblioteca
             }
 
             Console.WriteLine("¡Gracias por usar la biblioteca!");
+        }
+
+        // Método que muestra una descripción antes de cargar el programa.
+        static void MostrarDescripcion()
+        {
+            Console.WriteLine("==================================================");
+            Console.WriteLine("Ejercicio: agregar enunciado del ejercicio ");
+            Console.WriteLine("Descripción: agregar una descripción");
+            Console.WriteLine("Integrantes: agregar listado de integrantes");
+            Console.WriteLine("==================================================\n");
         }
     }
 }
