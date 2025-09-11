@@ -31,8 +31,18 @@ namespace Biblioteca
                     continue;
                 }
 
+
+                // Agregar validación para que el valor ingresado sea un número con al menos 7 / 8 dígitos.
+                Console.Write("Ingrese direccion: ");
+                string direccion = Console.ReadLine();
+                if (string.IsNullOrWhiteSpace(dni))
+                {
+                    Console.WriteLine("Direccion no puede estar vacío. Intente de nuevo.");
+                    continue;
+                }
+
                 // Una vez ingresado el Nombre y el DNI, doy de alta el Lector. 
-                biblioteca.AltaLector(nombre, dni);
+                biblioteca.AltaLector(nombre, dni, direccion);
             }
 
             // ---- CREAR LIBROS ----

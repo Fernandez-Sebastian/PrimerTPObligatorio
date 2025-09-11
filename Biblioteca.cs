@@ -34,7 +34,7 @@ namespace Biblioteca
             libros.Add(new Libro("El Señor de los Anillos", "Fantasía", new DateTime(1954, 7, 29), "J.R.R. Tolkien"));
         }
 
-        public void AltaLector(string nombre, string dni)
+        public void AltaLector(string nombre, string dni, string direccion)
         {
             // Any devuelve true si algún lector tiene el mismo DNI.
             // Si existe un lector con el mismo DNI, devuelve un mensaje indicando que el lector con el DNI ingresado, ya existe.
@@ -44,7 +44,7 @@ namespace Biblioteca
                 Console.WriteLine($"El lector con DNI {dni} ya existe.");
                 return;
             }
-            lectores.Add(new Lector(nombre, dni));
+            lectores.Add(new Lector(nombre, dni, direccion));
             Console.WriteLine($"Lector {nombre} dado de alta correctamente.");
         }
 
