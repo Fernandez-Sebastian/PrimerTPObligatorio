@@ -31,13 +31,12 @@ namespace Biblioteca
                     continue;
                 }
 
-
                 // Agregar validación para que el valor ingresado sea un número con al menos 7 / 8 dígitos.
-                Console.Write("Ingrese direccion: ");
+                Console.Write("Ingrese dirección: ");
                 string direccion = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(dni))
                 {
-                    Console.WriteLine("Direccion no puede estar vacío. Intente de nuevo.");
+                    Console.WriteLine("Dirección no puede estar vacío. Intente de nuevo.");
                     continue;
                 }
 
