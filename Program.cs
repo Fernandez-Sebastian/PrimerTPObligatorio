@@ -6,15 +6,22 @@ namespace Biblioteca
     {
         static void Main(string[] args)
         {
+            // Declaramos las variables que utilizaremos.
+            int dniNumero;
+            string dni;
+            string direccion;
+            string dniLector;
+            string nombre;
+            string titulo;
+            string tituloPrestamo;
+            string genero;
+            string resp;
+
             // Mostrar la descripción del ejercicio y los integrantes.
             MostrarDescripcion();
 
             // Creamos una instancia de la clase Biblioteca que contendrá los lectores y libros.
             Biblioteca biblioteca = new();
-
-            int dniNumero;
-            string dni;
-            string direccion;
 
             // ---- CREAR LECTORES ----
             // Bucle para crear Lectores
@@ -23,7 +30,7 @@ namespace Biblioteca
             {
                 // El método string.IsNullOrWhiteSpace(nombre) devuelve true si la cadena ingresada es vacía, contiene solo espacios en blanco o es null.
                 Console.Write("Ingrese nombre del lector (ENTER para terminar): ");
-                string nombre = Console.ReadLine();
+                nombre = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(nombre)) break;
                 
                 while (true) { 
@@ -69,7 +76,7 @@ namespace Biblioteca
             while (true)
             {
                 Console.Write("Ingrese título del libro (ENTER para terminar): ");
-                string titulo = Console.ReadLine();
+                titulo = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(titulo)) break;
 
                 // Se busca que el título ingresado exista en el listado de libros cargados.
@@ -81,7 +88,7 @@ namespace Biblioteca
                 }
 
                 Console.Write("Ingrese género del libro: ");
-                string genero = Console.ReadLine();
+                genero = Console.ReadLine();
                 while (string.IsNullOrWhiteSpace(genero))
                 {
                     Console.WriteLine("El género no puede estar vacío.");
@@ -119,11 +126,10 @@ namespace Biblioteca
 
             // ---- PRESTAR LIBROS ----
             // Bucle para prestar libros a un Lector
-            string tituloPrestamo;
             while (true)
             {
-                Console.Write("¿Desea prestar un libro? (s/n): ");
-                string resp = Console.ReadLine().ToLower();
+                Console.Write("\n ¿Desea prestar un libro? (s/n): ");
+                resp = Console.ReadLine().ToLower();
                 if (resp != "s") break;
 
                 // Se muestra los libros disponibles
@@ -144,7 +150,7 @@ namespace Biblioteca
                     }
                     break;
                 }
-                string dniLector;
+                
                 while (true) { 
                     Console.Write("Ingrese DNI del lector: ");
                     dniLector = Console.ReadLine();
