@@ -1,5 +1,4 @@
-﻿using System;
-using System.Net;
+using System.Globalization;
 
 namespace Biblioteca
 {
@@ -11,9 +10,11 @@ namespace Biblioteca
             MostrarDescripcion();
 
             // Creamos una instancia de la clase Biblioteca que contendrá los lectores y libros.
-            Biblioteca biblioteca = new Biblioteca();
+            Biblioteca biblioteca = new();
 
             int dniNumero;
+            string dni;
+            string direccion;
 
             // ---- CREAR LECTORES ----
             // Bucle para crear Lectores
@@ -25,8 +26,6 @@ namespace Biblioteca
                 string nombre = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(nombre)) break;
                 
-                string dni;
-                string direccion;
                 while (true) { 
                     Console.Write("Ingrese DNI del lector: ");
                     dni = Console.ReadLine();
@@ -59,6 +58,8 @@ namespace Biblioteca
                     break;
                 }
                 // Una vez ingresado el Nombre, el DNI y la dirección doy de alta el Lector. 
+
+                Console.WriteLine();
                 biblioteca.AltaLector(nombre, dni, direccion);
             }
 
@@ -102,8 +103,8 @@ namespace Biblioteca
                     // Primer parámetro es la cadena que queremos convertir.
                     // El segundo parámetro es out fechaLanzamiento: si la conversión es exitosa, el valor convertido se guarda en esta variable.
                     // TryParse devuelve true si el usuario ingreso una fecha válida, de lo contrario pide ingresar una nueva fecha.
-                    Console.Write("Ingrese fecha de lanzamiento (yyyy-MM-dd): ");
-                    if (DateTime.TryParse(Console.ReadLine(), out fechaLanzamiento))
+                    Console.Write("Ingrese fecha de lanzamiento: ");
+                    if (DateTime.TryParse(Console.ReadLine(), CultureInfo.CurrentCulture, DateTimeStyles.None, out fechaLanzamiento))
                         break;
                     else
                         Console.WriteLine("Formato inválido. Intente de nuevo.");
@@ -111,7 +112,7 @@ namespace Biblioteca
 
                 // Una vez se validaron todos los campos, se crea el nuevo libro y se agrega al listado de libros disponibles de la biblioteca.
                 // Mostramos cartel de que se agrego con éxito.
-                var nuevoLibro = new Libro(titulo, genero, fechaLanzamiento, autor);
+                Libro nuevoLibro = new(titulo, genero, fechaLanzamiento, autor);
                 biblioteca.LibrosDisponibles.Add(nuevoLibro);
                 Console.WriteLine($"Libro '{titulo}' agregado correctamente.\n");
             }
@@ -127,6 +128,11 @@ namespace Biblioteca
 
                 // Se muestra los libros disponibles
                 biblioteca.MostrarLibros();
+                Console.WriteLine();
+
+                //se muestran los lectores registrados
+                biblioteca.MostrarLectores();
+                Console.WriteLine();
 
                 while (true) { 
                     Console.Write("Ingrese título del libro a prestar: ");
@@ -159,6 +165,7 @@ namespace Biblioteca
                     }
                     break;
                 }
+
                 string resultado = biblioteca.PrestarLibro(tituloPrestamo, dniLector);
                 Console.WriteLine(resultado + "\n");
             }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
-
-namespace Biblioteca
+﻿namespace Biblioteca
 {
     public class Biblioteca
     {
@@ -55,7 +50,7 @@ namespace Biblioteca
             // Para ello busco el DNI en el listado de Lectores.
             // Con el return, corto la ejecución del método y no valido lo que sigue por debajo.
             // Si no existe, corto la ejecución y devuelvo "LECTOR INEXISTENTE".
-            var lector = lectores.FirstOrDefault(lectorExistente => lectorExistente.Dni == dni);
+            Lector? lector = lectores.FirstOrDefault(lectorExistente => lectorExistente.Dni == dni);
             if (lector == null) return "LECTOR INEXISTENTE";
 
             // La segunda ponderación es si el Lector ya tiene al menos 3 libros prestados.
@@ -70,7 +65,7 @@ namespace Biblioteca
             // en el listado de Libros y además no diferencia mayúsculas de minúsculas.
             // Si no hay coincidencia devuelve el mensaje "LIBRO INEXISTENTE".
 
-            var libro = libros.FirstOrDefault(buscarLibro => buscarLibro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
+            Libro? libro = libros.FirstOrDefault(buscarLibro => buscarLibro.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
             if (libro == null) return "LIBRO INEXISTENTE";
 
             // En caso que de que pasó las validaciones anteriores, queire decir que el libro está listo para ser prestado.
@@ -83,7 +78,7 @@ namespace Biblioteca
 
         public void MostrarLibros()
         {
-            // Muestra por consola el listado de libros disponibles.
+            //Método para mostrar todos los libros disponibles en la biblioteca en formato tabla
             // En caso de no tener libros disponibles, se muestra "No hay libros disponibles.".
             if (libros.Count == 0)
             {
@@ -91,14 +86,21 @@ namespace Biblioteca
                 return;
             }
 
-            Console.WriteLine("");
-            Console.WriteLine("Libros disponibles:");
-            Console.WriteLine("");
+            Console.WriteLine();
+            Console.WriteLine("Libros disponibles:\n");
+
             // Recorro el listado de Libros y por cada objeto muestro los atributos que tienen (Titulo, Autor, Genero,FechaLanzamiento).
             // El método ToShortDateString transforma una fecha en una cadena y la formatea dependiendo el uso horario configurado en la PC.
-            foreach (var libro in libros)
+            //Encabezado para la tabla de libros
+            Console.WriteLine(
+                $"{"Título",-30} | {"Autor",-25} | {"Género",-15} | {"Fecha lanzamiento",-12}");
+            Console.WriteLine(new string('-', 90)); // línea separadora
+
+            //Filas para la tabla de libros
+            foreach (Libro libro in libros)
             {
-                Console.WriteLine($"- {libro.Titulo} | {libro.Autor} | {libro.Genero} | {libro.FechaLanzamiento.ToShortDateString()}");
+                Console.WriteLine(
+                    $"{libro.Titulo,-30} | {libro.Autor,-25} | {libro.Genero,-15} | {libro.FechaLanzamiento.ToShortDateString(),-12}");
             }
         }
 
@@ -108,6 +110,34 @@ namespace Biblioteca
             // Busca coincidencia del título del listado de libros con el título pasado por parámetro sin 
             // diferenciar entre mayúsculas de minúsculas.
             return libros.Any(libroExiste => libroExiste.Titulo.Equals(titulo, StringComparison.OrdinalIgnoreCase));
+        }
+
+        public void MostrarLectores()
+        {
+            //Método para mostrar todos los lectores registrados en la biblioteca en formato tabla
+            // En caso de no tener lectores registrados, se muestra "No existen lectores registrados.".
+            if (lectores.Count == 0)
+            {
+                Console.WriteLine("No existen lectores registrados.");
+                return;
+            }
+
+            Console.WriteLine();
+            Console.WriteLine("Lectores registrados:\n");
+            Console.WriteLine();
+
+            // Recorro el listado de Lectores y por cada objeto muestro los atributos (Nombre, DNI, Cant. libros prestados con un count de la propiedad LibrosPrestados).
+            //Encabezado para la tabla de lectores
+            Console.WriteLine(
+                $"{"Nombre",-30} | {"Documento (DNI)",-25} | {"Cant. Libros prestados",-15}");
+            Console.WriteLine(new string('-', 90)); // línea separadora
+
+            //Filas para la tabla de lectores
+            foreach (Lector lector in lectores)
+            {
+                Console.WriteLine(
+                    $"{lector.Nombre,-30} | {lector.Dni,-25} | {lector.LibrosPrestados.Count,-15}");
+            }
         }
     }
 }

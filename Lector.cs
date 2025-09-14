@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Biblioteca
+﻿namespace Biblioteca
 {
     public class Lector
     {
