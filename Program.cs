@@ -25,6 +25,7 @@ namespace Biblioteca
 
             // ---- CREAR LECTORES ----
             // Bucle para crear Lectores
+            Console.WriteLine("\nInicio del Sistema \n");
             Console.WriteLine("---- Crear Lectores ----");
             while (true)
             {
@@ -182,11 +183,19 @@ namespace Biblioteca
         // Método que muestra una descripción antes de cargar el programa.
         static void MostrarDescripcion()
         {
-            Console.WriteLine("==================================================");
-            Console.WriteLine("Ejercicio: agregar enunciado del ejercicio ");
-            Console.WriteLine("Descripción: agregar una descripción");
-            Console.WriteLine("Integrantes: agregar listado de integrantes");
-            Console.WriteLine("==================================================\n");
+            Console.WriteLine("===================================================================================================================================================================================");
+            Console.WriteLine("Desarrollo de Sistemas Orientado a Objetos \n");
+            Console.WriteLine("Comisión B\n");
+            Console.WriteLine("===================================================================================================================================================================================");
+            Console.WriteLine("Enunciado TP: \n");
+            Console.WriteLine("Usando el ejemplo de la biblioteca  visto durante la semana en la explicación, nos piden como requerimiento que la misma tenga una colección de lectores registrados. \r\n\r\nDe los lectores conocemos su nombre y dni.\r\n\r\nCada lector puede tener hasta un máximo de 3 prestamos vigentes. \r\n\r\nCuando se realiza un préstamo, se extrae de la biblioteca el libro para entregárselo al lector (si es que puede retirarlo).\r\n\r\nEs decir, se debe retirar el libro de la lista de libros que posee la biblioteca para asignársela a la lista de libros que posee el lector en préstamo.");
+            Console.WriteLine("===================================================================================================================================================================================");
+            Console.WriteLine("Integrantes: \n");
+            Console.WriteLine("Ignacio, Grosman (33662091)");
+            Console.WriteLine("Sebastián, Fernández (34741667)");
+            Console.WriteLine("Glaucia, Ferreira (95858361)");
+            Console.WriteLine("Andrea, Maslucan Moreno");
+            Console.WriteLine("===================================================================================================================================================================================");
         }
     }
 }
