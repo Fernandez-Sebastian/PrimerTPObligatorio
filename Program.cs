@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net;
 
 namespace Biblioteca
 {
@@ -12,6 +13,8 @@ namespace Biblioteca
             // Creamos una instancia de la clase Biblioteca que contendrá los lectores y libros.
             Biblioteca biblioteca = new Biblioteca();
 
+            int dniNumero;
+
             // ---- CREAR LECTORES ----
             // Bucle para crear Lectores
             Console.WriteLine("---- Crear Lectores ----");
@@ -21,26 +24,41 @@ namespace Biblioteca
                 Console.Write("Ingrese nombre del lector (ENTER para terminar): ");
                 string nombre = Console.ReadLine();
                 if (string.IsNullOrWhiteSpace(nombre)) break;
-
-                // Agregar validación para que el valor ingresado sea un número con al menos 7 / 8 dígitos.
-                Console.Write("Ingrese DNI del lector: ");
-                string dni = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(dni))
-                {
-                    Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
-                    continue;
+                
+                string dni;
+                string direccion;
+                while (true) { 
+                    Console.Write("Ingrese DNI del lector: ");
+                    dni = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(dni))
+                    {
+                        Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (!int.TryParse(dni, out dniNumero))
+                    {
+                        Console.WriteLine("El DNI debe contener solo números. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (dni.Length < 7 || dni.Length > 8)
+                    {
+                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
+                        continue;
+                    }
+                    break;
                 }
 
-                // Agregar validación para que el valor ingresado sea un número con al menos 7 / 8 dígitos.
-                Console.Write("Ingrese dirección: ");
-                string direccion = Console.ReadLine();
-                if (string.IsNullOrWhiteSpace(dni))
-                {
-                    Console.WriteLine("Dirección no puede estar vacío. Intente de nuevo.");
-                    continue;
+                while (true) { 
+                    Console.Write("Ingrese dirección: ");
+                    direccion = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(direccion))
+                    {
+                        Console.WriteLine("Dirección no puede estar vacío. Intente de nuevo.");
+                        continue;
+                    }
+                    break;
                 }
-
-                // Una vez ingresado el Nombre y el DNI, doy de alta el Lector. 
+                // Una vez ingresado el Nombre, el DNI y la dirección doy de alta el Lector. 
                 biblioteca.AltaLector(nombre, dni, direccion);
             }
 
@@ -100,6 +118,7 @@ namespace Biblioteca
 
             // ---- PRESTAR LIBROS ----
             // Bucle para prestar libros a un Lector
+            string tituloPrestamo;
             while (true)
             {
                 Console.Write("¿Desea prestar un libro? (s/n): ");
@@ -109,14 +128,37 @@ namespace Biblioteca
                 // Se muestra los libros disponibles
                 biblioteca.MostrarLibros();
 
-                // Se pueden agregar validaciones al leer el titulo que no sea vacío.
-                Console.Write("Ingrese título del libro a prestar: ");
-                string tituloPrestamo = Console.ReadLine();
-
-                // Se puede agregar validaciones para que se ingrese números de DNI correctos.
-                Console.Write("Ingrese DNI del lector: ");
-                string dniLector = Console.ReadLine();
-
+                while (true) { 
+                    Console.Write("Ingrese título del libro a prestar: ");
+                    tituloPrestamo = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(tituloPrestamo))
+                    {
+                        Console.WriteLine("Título no puede estar vacío. Intente de nuevo.");
+                        continue;
+                    }
+                    break;
+                }
+                string dniLector;
+                while (true) { 
+                    Console.Write("Ingrese DNI del lector: ");
+                    dniLector = Console.ReadLine();
+                    if (string.IsNullOrWhiteSpace(dniLector))
+                    {
+                        Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (!int.TryParse(dniLector, out dniNumero))
+                    {
+                        Console.WriteLine("El DNI debe contener solo números. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (dniLector.Length < 7 || dniLector.Length > 8)
+                    {
+                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
+                        continue;
+                    }
+                    break;
+                }
                 string resultado = biblioteca.PrestarLibro(tituloPrestamo, dniLector);
                 Console.WriteLine(resultado + "\n");
             }
