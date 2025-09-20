@@ -42,6 +42,7 @@ classDiagram
       + Genero: string
       + FechaLanzamiento: DateTime
       + Autor: string
+      + Editorial: string
     }
 
     class Program {
