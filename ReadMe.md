@@ -50,6 +50,6 @@ classDiagram
       - MostrarDescripcion(): void
     }
 
-    Biblioteca o-- "0..*" Lector : registra
-    Biblioteca o-- "0..*" Libro  : posee
-    Lector "0..*" o-- Libro : presta
+    Biblioteca o-- "0..n" Lector : registra
+    Biblioteca o-- "0..n" Libro  : posee
+    Lector "0..n" o-- Libro : presta

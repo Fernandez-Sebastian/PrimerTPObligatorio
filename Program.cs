@@ -15,6 +15,8 @@ namespace Biblioteca
             string titulo;
             string tituloPrestamo;
             string genero;
+            string autor;
+            string editorial;
             string resp;
 
             // Mostrar la descripción del ejercicio y los integrantes.
@@ -37,21 +39,22 @@ namespace Biblioteca
                 while (true) { 
                     Console.Write("Ingrese DNI del lector: ");
                     dni = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(dni))
+                    if (dni.Length < 7 || dni.Length > 8)
+                    {
+                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (string.IsNullOrWhiteSpace(dni))
                     {
                         Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
                         continue;
-                    }
+                    } 
                     else if (!int.TryParse(dni, out dniNumero))
                     {
                         Console.WriteLine("El DNI debe contener solo números. Intente de nuevo.");
                         continue;
                     }
-                    else if (dni.Length < 7 || dni.Length > 8)
-                    {
-                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
-                        continue;
-                    }
+
                     break;
                 }
 
@@ -97,7 +100,7 @@ namespace Biblioteca
                 }
 
                 Console.Write("Ingrese autor del libro: ");
-                string autor = Console.ReadLine();
+                autor = Console.ReadLine();
                 while (string.IsNullOrWhiteSpace(autor))
                 {
                     Console.WriteLine("El autor no puede estar vacío.");
@@ -118,9 +121,18 @@ namespace Biblioteca
                         Console.WriteLine("Formato inválido. Intente de nuevo.");
                 }
 
+                Console.Write("Ingrese la Editorial del libro: ");
+                editorial = Console.ReadLine();
+                while (string.IsNullOrWhiteSpace(editorial))
+                {
+                    Console.WriteLine("La Editorial no puede estar vacía.");
+                    autor = Console.ReadLine();
+                }
+
+
                 // Una vez se validaron todos los campos, se crea el nuevo libro y se agrega al listado de libros disponibles de la biblioteca.
                 // Mostramos cartel de que se agrego con éxito.
-                Libro nuevoLibro = new(titulo, genero, fechaLanzamiento, autor);
+                Libro nuevoLibro = new(titulo, genero, fechaLanzamiento, autor, editorial);
                 biblioteca.LibrosDisponibles.Add(nuevoLibro);
                 Console.WriteLine($"Libro '{titulo}' agregado correctamente.\n");
             }
@@ -155,7 +167,12 @@ namespace Biblioteca
                 while (true) { 
                     Console.Write("Ingrese DNI del lector: ");
                     dniLector = Console.ReadLine();
-                    if (string.IsNullOrWhiteSpace(dniLector))
+                    if (dniLector.Length < 7 || dniLector.Length > 8)
+                    {
+                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (string.IsNullOrWhiteSpace(dniLector))
                     {
                         Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
                         continue;
@@ -163,11 +180,6 @@ namespace Biblioteca
                     else if (!int.TryParse(dniLector, out dniNumero))
                     {
                         Console.WriteLine("El DNI debe contener solo números. Intente de nuevo.");
-                        continue;
-                    }
-                    else if (dniLector.Length < 7 || dniLector.Length > 8)
-                    {
-                        Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
                         continue;
                     }
                     break;
@@ -191,10 +203,10 @@ namespace Biblioteca
             Console.WriteLine("Usando el ejemplo de la biblioteca  visto durante la semana en la explicación, nos piden como requerimiento que la misma tenga una colección de lectores registrados. \r\n\r\nDe los lectores conocemos su nombre y dni.\r\n\r\nCada lector puede tener hasta un máximo de 3 prestamos vigentes. \r\n\r\nCuando se realiza un préstamo, se extrae de la biblioteca el libro para entregárselo al lector (si es que puede retirarlo).\r\n\r\nEs decir, se debe retirar el libro de la lista de libros que posee la biblioteca para asignársela a la lista de libros que posee el lector en préstamo.");
             Console.WriteLine("===================================================================================================================================================================================");
             Console.WriteLine("Integrantes: \n");
-            Console.WriteLine("Ignacio, Grosman (33662091)");
-            Console.WriteLine("Sebastián, Fernández (34741667)");
-            Console.WriteLine("Glaucia, Ferreira (95858361)");
-            Console.WriteLine("Andrea, Maslucan Moreno");
+            Console.WriteLine("Ignacio, Grosman");
+            Console.WriteLine("Sebastián, Fernández");
+            Console.WriteLine("Glaucia, Ferreira");
+            Console.WriteLine("Andrea, Maslucan");
             Console.WriteLine("===================================================================================================================================================================================");
         }
     }
