@@ -127,7 +127,7 @@ namespace Biblioteca
                 while (string.IsNullOrWhiteSpace(editorial))
                 {
                     Console.WriteLine("La Editorial no puede estar vacía.");
-                    autor = Console.ReadLine();
+                    editorial = Console.ReadLine();
                 }
 
 
