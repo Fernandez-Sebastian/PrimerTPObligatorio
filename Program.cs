@@ -39,16 +39,17 @@ namespace Biblioteca
                 while (true) { 
                     Console.Write("Ingrese DNI del lector: ");
                     dni = Console.ReadLine();
-                    if (dni.Length < 7 || dni.Length > 8)
+
+                    if (string.IsNullOrWhiteSpace(dni))
+                    {
+                        Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
+                        continue;
+                    }
+                    else if (dni.Length < 7 || dni.Length > 8)
                     {
                         Console.WriteLine("El DNI debe tener 7 u 8 dígitos. Intente de nuevo.");
                         continue;
                     }
-                    else if (string.IsNullOrWhiteSpace(dni))
-                    {
-                        Console.WriteLine("DNI no puede estar vacío. Intente de nuevo.");
-                        continue;
-                    } 
                     else if (!int.TryParse(dni, out dniNumero))
                     {
                         Console.WriteLine("El DNI debe contener solo números. Intente de nuevo.");
@@ -126,7 +127,7 @@ namespace Biblioteca
                 while (string.IsNullOrWhiteSpace(editorial))
                 {
                     Console.WriteLine("La Editorial no puede estar vacía.");
-                    autor = Console.ReadLine();
+                    editorial = Console.ReadLine();
                 }
 
 
