@@ -23,7 +23,7 @@ classDiagram
       - List<Lector> lectores
       - List<Libro> libros
       + List<Libro> LibrosDisponibles
-      + AltaLector(nombre: string, dni: string, direccion: string) : void
+      + AltaLector(nombre: string, dni: string, direccion: string) void
       + PrestarLibro(titulo: string, dni: string): string
       + MostrarLibros(): void
       + ExisteLibro(titulo: string): bool
