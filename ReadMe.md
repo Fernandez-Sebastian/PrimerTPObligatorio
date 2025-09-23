@@ -1,5 +1,6 @@
 # TP 1 - Proyecto Biblioteca
 
+
 ## Descripción
 Este proyecto corresponde al Trabajo Práctico de **Desarrollo de Sistemas Orientado a Objetos**.  
 La aplicación permite registrar lectores, agregar libros y realizar préstamos con un máximo de Libros 3 por Lector.
@@ -13,8 +14,7 @@ La aplicación permite registrar lectores, agregar libros y realizar préstamos co
 - Andrea Maslucan
 
 
-
-- 
+ 
 ## UML – Diagrama de Clases
 
 ```mermaid
@@ -23,7 +23,7 @@ classDiagram
       - List<Lector> lectores
       - List<Libro> libros
       + List<Libro> LibrosDisponibles
-      + AltaLector(nombre: string, dni: string, direccion: string): void
+      + AltaLector(nombre: string, dni: string, direccion: string) : void
       + PrestarLibro(titulo: string, dni: string): string
       + MostrarLibros(): void
       + ExisteLibro(titulo: string): bool
