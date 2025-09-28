@@ -55,6 +55,6 @@ classDiagram
       - MostrarDescripcion() void
     }
 
-    Biblioteca --> "- lectores" <br> "0..n  " Lector : registra
-    Biblioteca --> "- libros" <br> "0..n" Libro : posee
-    Lector  --> "+ librosPrestados" <br> "0..3" Libro : presta
+    Biblioteca --> "- lectores" "0..n  " Lector : registra
+    Biblioteca --> "- libros" "0..n" Libro : posee
+    Lector  --> "+ librosPrestados" "0..3" Libro : presta
