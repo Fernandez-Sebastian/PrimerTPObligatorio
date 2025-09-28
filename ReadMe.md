@@ -23,8 +23,8 @@ classDiagram
 direction LR
 
     class Biblioteca {
-      - lectores: List<Lector>
-      - libros: List<Libro>
+      - lectores: List
+      - libros: List
       + librosDisponibles: List
       + Biblioteca()
       + ExisteLibro (titulo:string) bool
@@ -47,7 +47,7 @@ direction LR
       + nombre: string
       + dni: string
       + direccion: string
-      + librosPrestados: List<Libro>
+      + librosPrestados: List
       + Lector(string, string, string, List) void
     }
 
@@ -55,7 +55,8 @@ direction LR
       + Main(args: string[]) void
       - MostrarDescripcion() void
     }
-
-    Biblioteca --> "0..n  " Lector : registra
-    Biblioteca --> "0..n" Libro : posee
-    Lector  --> "0..3" Libro : presta
+       
+    Biblioteca --> "0..n" Lector : registra    -lectores
+    Biblioteca --> "0..n" Libro : posee    -libros
+    Lector  --> "0..3" Libro : presta    +librosPrestados
+    Program ..> Biblioteca: usa
