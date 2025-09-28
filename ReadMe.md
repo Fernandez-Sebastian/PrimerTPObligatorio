@@ -20,21 +20,22 @@ La aplicación permite registrar lectores, agregar libros y realizar préstamos co
 ```mermaid
 classDiagram
     class Biblioteca {
-      - List<Lector> lectores
-      - List<Libro> libros
-      + List<Libro> LibrosDisponibles
+      - lectores: List
+      - libros: List
+      + librosDisponibles: List
+      + Biblioteca()
+      + ExisteLibro (titulo:string) bool
+      + MostrarLibro() void
+      + PrestarLibro (titulo: string, dni: string) string
       + AltaLector(nombre: string, dni: string, direccion: string) void
-      + PrestarLibro(titulo: string, dni: string): string
-      + MostrarLibros(): void
-      + ExisteLibro(titulo: string): bool
-      + MostrarLectores(): void
+      + MostrarLectores() void
     }
 
     class Lector {
-      + Nombre: string
-      + Dni: string
-      + Direccion: string
-      + LibrosPrestados: List<Libro>
+      + nombre: string
+      + dni: string
+      + direccion: string
+      + librosPrestados: List<Libro>
     }
 
     class Libro {
@@ -50,6 +51,6 @@ classDiagram
       - MostrarDescripcion(): void
     }
 
-    Biblioteca o-- "0..n" Lector : registra
-    Biblioteca o-- "0..n" Libro  : posee
+    Biblioteca --> "0..n" Lector : registra
+    Biblioteca --> "0..n" Libro  : posee
     Lector "0..n" o-- Libro : presta
