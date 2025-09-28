@@ -31,26 +31,28 @@ classDiagram
       + MostrarLectores() void
     }
 
+    class Libro {
+      + titulo: string
+      + genero: string
+      + fechaLanzamiento: DateTime
+      + autor: string
+      + editorial: string
+      + Libro(string,string,DateTime, string, string) void
+    }
+
     class Lector {
       + nombre: string
       + dni: string
       + direccion: string
-      + librosPrestados: List<Libro>
-    }
-
-    class Libro {
-      + Titulo: string
-      + Genero: string
-      + FechaLanzamiento: DateTime
-      + Autor: string
-      + Editorial: string
+      + librosPrestados: List
+      + Lector(string, string, string, List) void
     }
 
     class Program {
-      + Main(args: string[]): void
-      - MostrarDescripcion(): void
+      + Main(args: string[]) void
+      - MostrarDescripcion() void
     }
 
-    Biblioteca --> "0..n" Lector : registra
-    Biblioteca --> "0..n" Libro  : posee
-    Lector "0..n" o-- Libro : presta
+    Biblioteca --> "- lectores <br> 0..n  " Lector : registra
+    Biblioteca --> "- libros <br> 0..n" Libro : posee
+    Lector  --> "+ librosPrestados <br> 0..3" Libro : presta
