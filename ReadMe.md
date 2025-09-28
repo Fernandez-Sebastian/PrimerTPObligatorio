@@ -18,12 +18,13 @@ La aplicación permite registrar lectores, agregar libros y realizar préstamos co
 ## UML – Diagrama de Clases
 
 ```mermaid
-direction LR
 
 classDiagram
+direction LR
+
     class Biblioteca {
-      - lectores: List
-      - libros: List
+      - lectores: List<Lector>
+      - libros: List<Libro>
       + librosDisponibles: List
       + Biblioteca()
       + ExisteLibro (titulo:string) bool
@@ -46,7 +47,7 @@ classDiagram
       + nombre: string
       + dni: string
       + direccion: string
-      + librosPrestados: List
+      + librosPrestados: List<Libro>
       + Lector(string, string, string, List) void
     }
 
