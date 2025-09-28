@@ -56,7 +56,7 @@ direction LR
       - MostrarDescripcion() void
     }
        
-    Biblioteca --> "0..n" Lector : registra    -lectores
-    Biblioteca --> "0..n" Libro : posee    -libros
-    Lector  --> "0..3" Libro : presta    +librosPrestados
+    Biblioteca --> "0..n        " Lector : registra
+    Biblioteca --> "0..n        " Libro : posee
+    Lector  --> "0..3        " Libro : presta
     Program ..> Biblioteca: usa
