@@ -17,4 +17,4 @@ class Libro {
   + Libro(titulo: string, autor: string, editorial: string)
 }
 
-Biblioteca --> "0..n" Libro : libros
+Biblioteca --> "0..n" Libro : -libros
